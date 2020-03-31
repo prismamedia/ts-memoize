@@ -1,0 +1,35 @@
+{
+  "name": "@prismamedia/ts-memoize",
+  "license": "MIT",
+  "private": false,
+  "contributors": [
+    "Yvann Boucher <yvann.boucher@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prismamedia/ts-memoize"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "tsc --build tsconfig.json tsconfig.esm.json",
+    "build:watch": "yarn run build --watch",
+    "build:clean": "yarn run build --clean",
+    "clean": "git clean -dfqX -- .",
+    "test": "NODE_ENV=test jest --detectOpenHandles --forceExit --verbose --passWithNoTests",
+    "test:watch": "yarn run test --watchAll",
+    "prettier": "prettier --write \"**/*.ts\""
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.2",
+    "jest": "^25.1.0",
+    "prettier": "^2.0.2",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  }
+}

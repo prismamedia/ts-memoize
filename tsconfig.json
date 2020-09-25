@@ -1,7 +1,17 @@
 {
-  "extends": "./tsconfig.base",
   "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitThis": false,
+    "moduleResolution": "Node",
+    "lib": ["ES2019"],
+    "target": "ES2019",
     "module": "CommonJS",
+    "rootDir": "src",
     "outDir": "dist/cjs",
     "declaration": true,
     "declarationMap": true,

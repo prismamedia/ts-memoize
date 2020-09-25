@@ -1,6 +1,15 @@
 {
-  "editor.codeActionsOnSave": { "source.organizeImports": true },
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "telemetry.enableTelemetry": false
 }

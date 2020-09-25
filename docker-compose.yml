@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  lib:
+    build: .
+    working_dir: /workspace
+    volumes:
+      - .:/workspace:delegated
+      - ~/.bash_history:/root/.bash_history
+    logging:
+      options:
+        max-size: 50k
+        max-file: '1'
+    restart: 'no'

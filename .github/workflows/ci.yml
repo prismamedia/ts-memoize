@@ -7,8 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        node: ['12']
+        node: ['12', '14']
+        include:
+          - node: '12'
+            publish: true
+            continue-on-error: false
+
+    continue-on-error: ${{ matrix.continue-on-error == true }}
 
     steps:
       - name: Checkout the code
@@ -16,21 +23,16 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Setup node v${{ matrix.node }}
+      - name: Setup NodeJS v${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache yarn
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/yarn
-          key: ${{ runner.OS }}-${{ matrix.node }}-yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-${{ matrix.node }}-yarn-
+      - name: Setup Yarn berry
+        run: yarn set version berry
 
-      - name: Install dependencies
-        run: yarn install --no-progress --non-interactive --frozen-lockfile
+      - name: Validate dependencies
+        run: yarn install --immutable --immutable-cache
 
       - name: Build
         run: yarn run build
@@ -39,11 +41,10 @@ jobs:
         run: yarn run test
 
       - name: Publish to npmjs
-        if: "matrix.node == '12' && startsWith(github.ref, 'refs/tags/')"
+        if: "matrix.publish == true && startsWith(github.ref, 'refs/tags/')"
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_REGISTRY_AUTH_TOKEN}" > .npmrc
           npm version --no-git-tag-version ${GITHUB_REF/refs\/tags\//}
           npm publish
         env:
-          CI: true
           NPM_REGISTRY_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_AUTH_TOKEN }}

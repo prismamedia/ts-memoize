@@ -633,6 +633,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@prismamedia/ts-memoize@workspace:."
   dependencies:
+    "@tsconfig/node12": ^1.0.7
     "@types/jest": ^26.0.14
     "@types/node": ^14.11.2
     "@yarnpkg/pnpify": ^2.2.1
@@ -674,6 +675,13 @@ __metadata:
   dependencies:
     defer-to-connect: ^2.0.0
   checksum: 13d8f71dbd792b620b2cd13d72d086ef031ebefd5263a9db2f34693a32e4d90920fa1d7075cd59bf0c9810b2b1b93ad36d89fc88aba4cd3b8022df7ecc5ffdec
+  languageName: node
+  linkType: hard
+
+"@tsconfig/node12@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@tsconfig/node12@npm:1.0.7"
+  checksum: 82b0352f66bb84afcf4fe4d771d25dcdc2fbfd0dcd6c5efe475830e0df6806d687bdde3aba52d5c4d2d4dfee252093ed5cfc27a3fc47dc389a3f4fb0ea323390
   languageName: node
   linkType: hard
 

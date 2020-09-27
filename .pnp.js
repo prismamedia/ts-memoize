@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
+            ["@tsconfig/node12", "npm:1.0.7"],
             ["@types/jest", "npm:26.0.14"],
             ["@types/node", "npm:14.11.2"],
             ["@yarnpkg/pnpify", "virtual:66a8e7624fff1571ee29e4f27634a48a26ff5ce29edea37b57d2144c3d234b2d7232685fa0e796a2bc05f984285c33fd69b1f5473590d4c68e58539758ca8764#npm:2.2.1"],
@@ -769,6 +770,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@prismamedia/ts-memoize", "workspace:."],
+            ["@tsconfig/node12", "npm:1.0.7"],
             ["@types/jest", "npm:26.0.14"],
             ["@types/node", "npm:14.11.2"],
             ["@yarnpkg/pnpify", "virtual:66a8e7624fff1571ee29e4f27634a48a26ff5ce29edea37b57d2144c3d234b2d7232685fa0e796a2bc05f984285c33fd69b1f5473590d4c68e58539758ca8764#npm:2.2.1"],
@@ -815,6 +817,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@szmarczak/http-timer", "npm:4.0.5"],
             ["defer-to-connect", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@tsconfig/node12", [
+        ["npm:1.0.7", {
+          "packageLocation": "./.yarn/cache/@tsconfig-node12-npm-1.0.7-3bbdd844d7-82b0352f66.zip/node_modules/@tsconfig/node12/",
+          "packageDependencies": [
+            ["@tsconfig/node12", "npm:1.0.7"]
           ],
           "linkType": "HARD",
         }]

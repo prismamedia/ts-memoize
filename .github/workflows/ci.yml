@@ -43,8 +43,7 @@ jobs:
       - name: Publish to npmjs
         if: "matrix.publish == true && startsWith(github.ref, 'refs/tags/')"
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_REGISTRY_AUTH_TOKEN}" > .npmrc
           npm version --no-git-tag-version ${GITHUB_REF/refs\/tags\//}
-          npm publish
+          yarn npm publish --tolerate-republish --access public
         env:
-          NPM_REGISTRY_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_AUTH_TOKEN }}
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_AUTH_TOKEN }}

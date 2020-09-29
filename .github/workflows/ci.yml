@@ -17,19 +17,14 @@ jobs:
 
     continue-on-error: ${{ matrix.continue-on-error == true }}
 
+    container:
+      image: node:${{ matrix.node }}
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
-
-      - name: Setup NodeJS v${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Setup Yarn berry
-        run: yarn set version berry
 
       - name: Validate dependencies
         run: yarn install --immutable --immutable-cache
@@ -43,7 +38,7 @@ jobs:
       - name: Publish to npmjs
         if: "matrix.publish == true && startsWith(github.ref, 'refs/tags/')"
         run: |
-          npm version --no-git-tag-version ${GITHUB_REF/refs\/tags\//}
+          npm version --no-git-tag-version ${GITHUB_REF#refs/tags/}
           yarn npm publish --tolerate-republish --access public
         env:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_AUTH_TOKEN }}

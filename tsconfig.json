@@ -4,7 +4,9 @@
     "noImplicitThis": false,
     "experimentalDecorators": true,
     "rootDir": "src",
-    "outDir": "dist/cjs",
+    "moduleResolution": "Node",
+    "module": "ES2020",
+    "outDir": "dist/mjs",
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "dist/types"

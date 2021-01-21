@@ -9,9 +9,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ['12', '14']
+        node:
+          - 12
+          - 14
+
         include:
-          - node: '12'
+          - node: 12
             publish: true
             continue-on-error: false
 
@@ -22,11 +25,11 @@ jobs:
 
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
-      - name: Validate dependencies
+      - name: Validate the dependencies
         run: yarn install --immutable --immutable-cache
 
       - name: Build

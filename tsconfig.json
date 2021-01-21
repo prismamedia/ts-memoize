@@ -4,6 +4,8 @@
     "noImplicitThis": false,
     "experimentalDecorators": true,
     "rootDir": "src",
+    "moduleResolution": "Node",
+    "module": "CommonJS",
     "outDir": "dist/cjs",
     "declaration": true,
     "declarationMap": true,

@@ -10,11 +10,11 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - 12
           - 14
+          - 16
 
         include:
-          - node: 12
+          - node: 14
             publish: true
             continue-on-error: false
 
@@ -32,8 +32,8 @@ jobs:
       - name: Validate the dependencies
         run: yarn install --immutable --immutable-cache
 
-      - name: Build
-        run: yarn run build
+      - name: Compile
+        run: yarn run compile
 
       - name: Test
         run: yarn run test

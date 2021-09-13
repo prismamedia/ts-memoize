@@ -2,11 +2,12 @@ version: '3.8'
 
 services:
   lib:
-    image: node:12
+    image: node:14
     command: sleep infinity
     working_dir: /workspace
     volumes:
       - .:/workspace
+      - ~/.bash_history:/root/.bash_history
     logging:
       options:
         max-size: 50k

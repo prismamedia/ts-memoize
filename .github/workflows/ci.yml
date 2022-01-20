@@ -10,11 +10,10 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - 14
           - 16
 
         include:
-          - node: 14
+          - node: 16
             publish: true
             continue-on-error: false
 

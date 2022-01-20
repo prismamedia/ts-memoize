@@ -10,8 +10,10 @@
 
 dist
 node_modules
+
 package-lock.json
 packages/**/coverage
+packages/**/build
 packages/**/dist
 packages/**/node_modules
 packages/**/package-lock.json

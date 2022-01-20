@@ -85,5 +85,3 @@ export function Memoize(hashFunction?: (...args: any) => any): MethodDecorator {
     }
   };
 }
-
-export default Memoize;

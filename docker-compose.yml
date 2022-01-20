@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   lib:
-    image: node:14
+    image: node:16
     command: sleep infinity
     working_dir: /workspace
     volumes:

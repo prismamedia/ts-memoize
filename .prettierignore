@@ -1,4 +1,5 @@
-.pnp.cjs
-.yarn/
-.yarnrc.yml
-package.json
+.pnp.*
+.yarn
+**/package.json
+**/dist/
+yarn.lock

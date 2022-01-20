@@ -1,12 +1,13 @@
 {
-  "extends": "@tsconfig/node14",
+  "extends": "@tsconfig/node16",
   "compilerOptions": {
     "noImplicitThis": false,
     "experimentalDecorators": true,
-    "rootDir": "src",
     "moduleResolution": "Node",
-    "module": "CommonJS",
+
+    "rootDir": "src",
     "outDir": "dist/cjs",
+
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "dist/types"

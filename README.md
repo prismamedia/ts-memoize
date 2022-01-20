@@ -8,7 +8,6 @@ It's almost a copy/paste of https://github.com/darrylhodgins/typescript-memoize,
 
 ```js
 import { Memoize } from '@prismamedia/ts-memoize';
-// or import Memoize from '@prismamedia/ts-memoize';
 
 class Foo {
   @Memoize()

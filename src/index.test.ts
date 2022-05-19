@@ -1,4 +1,4 @@
-import { Memoize } from './index';
+import { doNotMemoize, Memoize } from './index';
 
 describe('Memoize', () => {
   it('works for class method without decorator, for reference', () => {
@@ -187,5 +187,25 @@ describe('Memoize', () => {
     expect(instanceB.testedGetter).toEqual('OK');
     expect(instanceA.callCount).toBe(1);
     expect(instanceB.callCount).toBe(1);
+  });
+
+  it('is able to not memoize', () => {
+    class Foo {
+      public callCount: number = 0;
+
+      @Memoize(() => doNotMemoize)
+      public increment(): number {
+        return ++this.callCount;
+      }
+    }
+
+    const foo = new Foo();
+    expect(foo.callCount).toBe(0);
+
+    foo.increment();
+    expect(foo.callCount).toBe(1);
+
+    foo.increment();
+    expect(foo.callCount).toBe(2);
   });
 });

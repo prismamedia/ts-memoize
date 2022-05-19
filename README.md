@@ -7,7 +7,7 @@ It's almost a copy/paste of https://github.com/darrylhodgins/typescript-memoize,
 # Usage
 
 ```js
-import { Memoize } from '@prismamedia/ts-memoize';
+import { doNotMemoize, Memoize } from '@prismamedia/ts-memoize';
 
 class Foo {
   @Memoize()
@@ -29,6 +29,12 @@ class Foo {
   // The "hashFunction" can return anything valid as a "Map" key
   @Memoize((a: number, b: number) => [a, b].join('|'))
   public myCachedMethod(a: number, b: number): number {
+    return a + b;
+  }
+
+  // The "hashFunction" can return the Symbol "doNotMemoize" in order to not memoize the result
+  @Memoize((a: number, b: number) => a === b ? doNotMemoize : [a, b].join('|'))
+  public myMaybeCachedMethod(a: number, b: number): number {
     return a + b;
   }
 }

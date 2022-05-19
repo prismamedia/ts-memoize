@@ -1,8 +1,10 @@
+export const doNotMemoize = Symbol('Do not memoize');
+
 type Function<TArgs extends any[], TResult> = (...args: TArgs) => TResult;
 
 function memoize<TArgs extends any[], TResult, TKey>(
   originalFunction: Function<TArgs, TResult>,
-  hashFunction?: Function<TArgs, TKey>,
+  hashFunction?: Function<TArgs, TKey | typeof doNotMemoize>,
 ): (...args: TArgs) => TResult {
   const cachePropertyName = Symbol(
     `Memoized "${originalFunction.name}" function's cache`,
@@ -25,6 +27,10 @@ function memoize<TArgs extends any[], TResult, TKey>(
         }
 
         const key = hashFunction.apply(this, args);
+
+        if (key === doNotMemoize) {
+          return originalFunction.apply(this, args);
+        }
 
         let value: TResult;
         if (!cache.has(key)) {

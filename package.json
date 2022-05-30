@@ -8,17 +8,18 @@
     "type": "git",
     "url": "https://github.com/prismamedia/ts-memoize"
   },
-  "main": "dist/cjs/index.js",
-  "typings": "dist/types/index.d.ts",
   "engines": {
     "node": ">=16"
   },
+  "type": "module",
+  "exports": "./dist/index.js",
+  "sideEffects": false,
   "scripts": {
     "format": "prettier --write './src/**/*.ts'",
     "compile": "tsc --build",
     "compile:watch": "yarn compile --watch",
-    "test": "jest",
-    "test:watch": "yarn test --watchAll"
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
+    "test:watch": "yarn run test --watchAll"
   },
   "devDependencies": {
     "@tsconfig/node16": "1.0.2",
@@ -26,8 +27,8 @@
     "@types/node": "16.11.36",
     "jest": "28.1.0",
     "prettier": "2.6.2",
-    "ts-jest": "28.0.2",
-    "typescript": "4.6.4"
+    "ts-jest": "28.0.3",
+    "typescript": "4.7.2"
   },
   "packageManager": "yarn@3.2.1"
 }

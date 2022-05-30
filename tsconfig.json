@@ -1,15 +1,17 @@
 {
   "extends": "@tsconfig/node16",
   "compilerOptions": {
-    "noImplicitThis": false,
-    "experimentalDecorators": true,
-    "moduleResolution": "Node",
+    "lib": ["ES2022"],
+    "target": "ES2022",
+    "module": "Node16",
 
-    "rootDir": "src",
-    "outDir": "dist/cjs",
-
+    "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "declarationDir": "dist/types"
+    "experimentalDecorators": true,
+    "noImplicitThis": false,
+
+    "rootDir": "src",
+    "outDir": "dist"
   }
 }

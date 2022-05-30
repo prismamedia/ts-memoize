@@ -1,4 +1,4 @@
-import { doNotMemoize, Memoize } from './index';
+import { doNotMemoize, Memoize } from './index.js';
 
 describe('Memoize', () => {
   it('works for class method without decorator, for reference', () => {

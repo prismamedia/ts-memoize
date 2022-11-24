@@ -1,13 +1,13 @@
 **Typescript Memoize class method/getter decorator**
 
-[![npm version](https://badge.fury.io/js/%40prismamedia%2Fts-memoize.svg)](https://badge.fury.io/js/%40prismamedia%2Fts-memoize) [![github actions status](https://github.com/prismamedia/ts-memoize/workflows/CI/badge.svg)](https://github.com/prismamedia/ts-memoize/actions) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![npm version](https://badge.fury.io/js/%40prismamedia%2Fmemoize.svg)](https://badge.fury.io/js/%40prismamedia%2Fts-memoize) [![github actions status](https://github.com/prismamedia/ts-memoize/workflows/CI/badge.svg)](https://github.com/prismamedia/ts-memoize/actions) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 It's almost a copy/paste of https://github.com/darrylhodgins/typescript-memoize, without the legacy part
 
 # Usage
 
 ```js
-import { doNotMemoize, Memoize } from '@prismamedia/ts-memoize';
+import { doNotMemoize, Memoize } from '@prismamedia/memoize';
 
 class Foo {
   @Memoize()

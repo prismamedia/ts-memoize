@@ -129,7 +129,7 @@ describe('Memoize', () => {
         }
       }
     }).toThrowErrorMatchingInlineSnapshot(
-      `"Foo.testedMethod's \\"@Memoize()\\" decorator needs a \\"hashFunction\\" to compute a cache key"`,
+      `"Foo.testedMethod's "@Memoize()" decorator needs a "hashFunction" to compute a cache key"`,
     );
   });
 

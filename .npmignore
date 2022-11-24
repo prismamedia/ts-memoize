@@ -1,4 +1,9 @@
-.github/
-.vscode/
-.yarn/
+**/*.log
+
+.github
+.pnp.*
+.vscode
+.yarn
+
 node_modules/
+tsconfig.tsbuildinfo

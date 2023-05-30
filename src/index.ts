@@ -62,7 +62,7 @@ export function Memoize(hashFunction?: (...args: any) => any): MethodDecorator {
               const value = originalFunction.apply(this);
 
               Object.defineProperty(this, propertyKey, {
-                configurable: false,
+                configurable: true,
                 enumerable: false,
                 writable: false,
                 value: () => value,
@@ -78,7 +78,7 @@ export function Memoize(hashFunction?: (...args: any) => any): MethodDecorator {
         const value = originalFunction.apply(this);
 
         Object.defineProperty(this, propertyKey, {
-          configurable: false,
+          configurable: true,
           enumerable: false,
           writable: false,
           value,

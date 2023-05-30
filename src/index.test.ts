@@ -13,49 +13,149 @@ describe('Memoize', () => {
       }
     }
 
-    const instance = new Foo();
-    expect(instance.callCount).toBe(0);
-
-    expect(instance.testedMethod()).toEqual('OK');
-    expect(instance.callCount).toBe(1);
-
-    expect(instance.testedMethod()).toEqual('OK');
-    expect(instance.callCount).toBe(2);
-  });
-
-  it('works for class method with decorator without arguments', () => {
-    class Foo {
-      public callCount: number = 0;
-
-      @Memoize()
-      public testedMethod(): string {
+    class Bar extends Foo {
+      public override testedMethod(): string {
         this.callCount++;
 
         return 'OK';
       }
     }
 
-    const instanceA = new Foo();
-    expect(instanceA.callCount).toBe(0);
+    const foo = new Foo();
+    const bar = new Bar();
 
-    const instanceB = new Foo();
-    expect(instanceB.callCount).toBe(0);
+    expect(foo.callCount).toBe(0);
+    expect(bar.callCount).toBe(0);
 
-    expect(instanceA.testedMethod()).toEqual('OK');
-    expect(instanceA.callCount).toBe(1);
-    expect(instanceB.callCount).toBe(0);
+    expect(foo.testedMethod()).toEqual('OK');
+    expect(foo.callCount).toBe(1);
+    expect(bar.callCount).toBe(0);
 
-    expect(instanceA.testedMethod()).toEqual('OK');
-    expect(instanceA.callCount).toBe(1);
-    expect(instanceB.callCount).toBe(0);
+    expect(foo.testedMethod()).toEqual('OK');
+    expect(foo.callCount).toBe(2);
+    expect(bar.callCount).toBe(0);
 
-    expect(instanceB.testedMethod()).toEqual('OK');
-    expect(instanceA.callCount).toBe(1);
-    expect(instanceB.callCount).toBe(1);
+    expect(bar.testedMethod()).toEqual('OK');
+    expect(foo.callCount).toBe(2);
+    expect(bar.callCount).toBe(1);
 
-    expect(instanceB.testedMethod()).toEqual('OK');
-    expect(instanceA.callCount).toBe(1);
-    expect(instanceB.callCount).toBe(1);
+    expect(bar.testedMethod()).toEqual('OK');
+    expect(foo.callCount).toBe(2);
+    expect(bar.callCount).toBe(2);
+  });
+
+  it('works for class method with decorator overriding decorated method', () => {
+    abstract class Foo {
+      public aCallCount: number = 0;
+
+      @Memoize()
+      public testedMethodA(): string {
+        this.aCallCount++;
+
+        return 'A';
+      }
+    }
+
+    class Bar extends Foo {
+      @Memoize()
+      public override testedMethodA(): string {
+        return super.testedMethodA();
+      }
+    }
+
+    const barA = new Bar();
+    expect(barA.aCallCount).toBe(0);
+
+    barA.testedMethodA();
+    expect(barA.aCallCount).toBe(1);
+
+    barA.testedMethodA();
+    expect(barA.aCallCount).toBe(1);
+  });
+
+  it('works for class method with decorator without arguments', () => {
+    abstract class Foo {
+      public aCallCount: number = 0;
+
+      @Memoize()
+      public testedMethodA(): string {
+        this.aCallCount++;
+
+        return 'A';
+      }
+    }
+
+    class Bar extends Foo {
+      public bCallCount: number = 0;
+
+      @Memoize()
+      public override testedMethodA(): string {
+        return super.testedMethodA();
+      }
+
+      @Memoize()
+      public testedMethodB(): string {
+        this.bCallCount++;
+
+        return 'B';
+      }
+    }
+
+    const barA = new Bar();
+    expect(barA.aCallCount).toBe(0);
+    expect(barA.bCallCount).toBe(0);
+
+    const barB = new Bar();
+    expect(barB.aCallCount).toBe(0);
+    expect(barB.bCallCount).toBe(0);
+
+    expect(barA.testedMethodA()).toEqual('A');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(0);
+    expect(barB.aCallCount).toBe(0);
+    expect(barB.bCallCount).toBe(0);
+
+    expect(barA.testedMethodA()).toEqual('A');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(0);
+    expect(barB.aCallCount).toBe(0);
+    expect(barB.bCallCount).toBe(0);
+
+    expect(barB.testedMethodA()).toEqual('A');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(0);
+    expect(barB.aCallCount).toBe(1);
+    expect(barB.bCallCount).toBe(0);
+
+    expect(barB.testedMethodA()).toEqual('A');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(0);
+    expect(barB.aCallCount).toBe(1);
+    expect(barB.bCallCount).toBe(0);
+
+    expect(barA.testedMethodB()).toEqual('B');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(1);
+    expect(barB.aCallCount).toBe(1);
+    expect(barB.bCallCount).toBe(0);
+
+    expect(barA.testedMethodB()).toEqual('B');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(1);
+    expect(barB.aCallCount).toBe(1);
+    expect(barB.bCallCount).toBe(0);
+
+    expect(barB.testedMethodB()).toEqual('B');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(1);
+    expect(barB.aCallCount).toBe(1);
+    expect(barB.bCallCount).toBe(1);
+
+    expect(barB.testedMethodB()).toEqual('B');
+    expect(barA.aCallCount).toBe(1);
+    expect(barA.bCallCount).toBe(1);
+    expect(barB.aCallCount).toBe(1);
+    expect(barB.bCallCount).toBe(1);
   });
 
   it('works for class method with decorator with arguments', () => {
@@ -70,10 +170,19 @@ describe('Memoize', () => {
       }
     }
 
-    const instanceA = new Foo();
+    class Bar extends Foo {
+      public bCallCount: number = 0;
+
+      @Memoize((a: number, b: number) => [a, b].join(','))
+      public override testedMethod(a: number, b: number): number {
+        return super.testedMethod(a, b);
+      }
+    }
+
+    const instanceA = new Bar();
     expect(instanceA.callCount).toBe(0);
 
-    const instanceB = new Foo();
+    const instanceB = new Bar();
     expect(instanceB.callCount).toBe(0);
 
     expect(instanceA.testedMethod(1, 2)).toEqual(3);

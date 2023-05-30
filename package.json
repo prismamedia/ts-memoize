@@ -9,7 +9,7 @@
     "url": "https://github.com/prismamedia/ts-memoize"
   },
   "engines": {
-    "node": ">=16.10"
+    "node": ">=18.12"
   },
   "type": "module",
   "exports": {
@@ -20,25 +20,23 @@
   },
   "sideEffects": false,
   "scripts": {
-    "format": "prettier --cache --write ./src/**/*.ts",
+    "format": "prettier --cache --write .",
     "compile": "tsc --build",
     "compile:watch": "yarn run compile --watch",
-    "test": "yarn node --no-warnings --experimental-vm-modules $(yarn bin jest) --no-cache",
+    "test": "yarn node --no-warnings --experimental-vm-modules $(yarn bin jest) --detectOpenHandles --logHeapUsage",
     "test:watch": "yarn run test --watchAll"
   },
   "devDependencies": {
-    "@babel/core": "7.20.2",
-    "@babel/plugin-proposal-decorators": "7.20.2",
-    "@jest/globals": "29.3.1",
-    "@swc/core": "1.3.19",
-    "@swc/jest": "0.2.23",
-    "@tsconfig/node16": "1.0.3",
-    "@types/jest": "29.2.3",
-    "@types/node": "16.18.3",
-    "@yarnpkg/sdks": "3.0.0-rc.31",
-    "jest": "29.3.1",
-    "prettier": "2.8.0",
-    "typescript": "4.9.3"
+    "@jest/globals": "29.5.0",
+    "@swc/core": "1.3.61",
+    "@swc/jest": "0.2.26",
+    "@tsconfig/node18": "2.0.1",
+    "@types/node": "18.16.16",
+    "@yarnpkg/sdks": "3.0.0-rc.44",
+    "jest": "29.5.0",
+    "prettier": "2.8.8",
+    "publint": "0.1.12",
+    "typescript": "5.0.4"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.5.1"
 }

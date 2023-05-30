@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0] - 2023-05-30
+
+### Changed
+
+- Required Node >=18
+- Optimized for getter and method without hashFunction
+
 ## [4.0.0] - 2022-11-24
 
 ### Changed

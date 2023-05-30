@@ -1,65 +1,5 @@
-export const doNotMemoize = Symbol('Do not memoize');
-
-type Function<TArgs extends any[], TResult> = (...args: TArgs) => TResult;
-
-function memoize<TArgs extends any[], TResult, TKey>(
-  originalFunction: Function<TArgs, TResult>,
-  hashFunction?: Function<TArgs, TKey | typeof doNotMemoize>,
-): (...args: TArgs) => TResult {
-  const cachePropertyName = Symbol(
-    `Memoized "${originalFunction.name}" function's cache`,
-  );
-
-  return hashFunction
-    ? function memoizedFunction(...args: TArgs): TResult {
-        let cache: Map<TKey, TResult>;
-        if (this.hasOwnProperty(cachePropertyName)) {
-          cache = this[cachePropertyName];
-        } else {
-          cache = new Map();
-
-          Object.defineProperty(this, cachePropertyName, {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: cache,
-          });
-        }
-
-        const key = hashFunction.apply(this, args);
-
-        if (key === doNotMemoize) {
-          return originalFunction.apply(this, args);
-        }
-
-        let value: TResult;
-        if (!cache.has(key)) {
-          value = originalFunction.apply(this, args);
-
-          cache.set(key, value);
-        } else {
-          value = cache.get(key) as TResult;
-        }
-
-        return value;
-      }
-    : function memoizedFunction(): TResult {
-        if (this.hasOwnProperty(cachePropertyName)) {
-          return this[cachePropertyName] as TResult;
-        }
-
-        const value = originalFunction.apply(this);
-
-        Object.defineProperty(this, cachePropertyName, {
-          configurable: false,
-          enumerable: false,
-          writable: false,
-          value,
-        });
-
-        return value;
-      };
-}
+export const doNotCache = Symbol('Memoize: do not cache');
+export const cacheProperty = Symbol('Memoize: cache property');
 
 /**
  * The "Memoize" decorator is used to avoid multiple computations for multiple calls of the same method or getter
@@ -79,9 +19,73 @@ export function Memoize(hashFunction?: (...args: any) => any): MethodDecorator {
         }
       }
 
-      descriptor.value = memoize(descriptor.value as any, hashFunction) as any;
+      const originalFunction = descriptor.value!;
+
+      descriptor.value = (
+        hashFunction
+          ? function (...args: any[]) {
+              let globalCache: Map<string | symbol, Map<any, any>> | undefined =
+                this[cacheProperty];
+
+              if (!globalCache) {
+                Object.defineProperty(this, cacheProperty, {
+                  configurable: false,
+                  enumerable: false,
+                  writable: false,
+                  value: (globalCache = new Map()),
+                });
+              }
+
+              let cache = globalCache.get(propertyKey);
+
+              if (!cache) {
+                globalCache.set(propertyKey, (cache = new Map()));
+              }
+
+              const key = hashFunction!.apply(this, args);
+
+              if (key === doNotCache) {
+                return originalFunction.apply(this, args);
+              }
+
+              let value;
+
+              if (!cache.has(key)) {
+                cache.set(key, (value = originalFunction.apply(this, args)));
+              } else {
+                value = cache.get(key);
+              }
+
+              return value;
+            }
+          : function () {
+              const value = originalFunction.apply(this);
+
+              Object.defineProperty(this, propertyKey, {
+                configurable: false,
+                enumerable: false,
+                writable: false,
+                value: () => value,
+              });
+
+              return value;
+            }
+      ) as any;
     } else if (typeof descriptor.get === 'function') {
-      descriptor.get = memoize(descriptor.get);
+      const originalFunction = descriptor.get!;
+
+      descriptor.get = function () {
+        const value = originalFunction.apply(this);
+
+        Object.defineProperty(this, propertyKey, {
+          configurable: false,
+          enumerable: false,
+          writable: false,
+          value,
+        });
+
+        return value;
+      };
     } else {
       throw TypeError(
         `"@Memoize()" can be used only for method and getter: it has been used on ${target}.${String(

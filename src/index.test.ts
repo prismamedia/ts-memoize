@@ -1,4 +1,5 @@
-import { doNotMemoize, Memoize } from './index.js';
+import { describe, expect, it } from '@jest/globals';
+import { Memoize, doNotCache } from './index.js';
 
 describe('Memoize', () => {
   it('works for class method without decorator, for reference', () => {
@@ -193,7 +194,7 @@ describe('Memoize', () => {
     class Foo {
       public callCount: number = 0;
 
-      @Memoize(() => doNotMemoize)
+      @Memoize(() => doNotCache)
       public increment(): number {
         return ++this.callCount;
       }

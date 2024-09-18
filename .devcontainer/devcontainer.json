@@ -6,7 +6,7 @@
   "postStartCommand": "yarn && yarn sdks vscode",
   "customizations": {
     "vscode": {
-      "extensions": ["arcanis.vscode-zipfs"]
+      "extensions": ["arcanis.vscode-zipfs", "esbenp.prettier-vscode"]
     }
   }
 }

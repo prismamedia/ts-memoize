@@ -11,12 +11,11 @@ jobs:
 
       matrix:
         node:
-          - 18
-          - 19
-          - 20
+          - 22
+          - 23
 
         include:
-          - node: 18
+          - node: 22
             publish: true
             continue-on-error: false
 

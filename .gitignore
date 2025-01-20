@@ -5,11 +5,7 @@
 /.swc/
 
 /.yarn/*
-!/.yarn/cache
-!/.yarn/plugins
 !/.yarn/releases
-!/.yarn/sdks
-!/.yarn/versions
 
 /build/
 /core

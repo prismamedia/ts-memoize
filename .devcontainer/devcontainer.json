@@ -3,10 +3,10 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "lib",
   "workspaceFolder": "/workspace",
-  "postStartCommand": "yarn && yarn sdks vscode",
+  "postStartCommand": "yarn",
   "customizations": {
     "vscode": {
-      "extensions": ["arcanis.vscode-zipfs", "esbenp.prettier-vscode"]
+      "extensions": ["esbenp.prettier-vscode"]
     }
   }
 }

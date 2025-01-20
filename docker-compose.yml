@@ -1,6 +1,6 @@
 services:
   lib:
-    image: node:18
+    image: node:22
     command: sleep infinity
     working_dir: /workspace
     volumes:

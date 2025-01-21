@@ -1,16 +1,19 @@
 {
-  "extends": "@tsconfig/node22",
-
   "include": ["src/**/*.ts"],
 
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "rootDir": "src",
+    "outDir": "dist",
+
+    "lib": ["ES2024"],
     "target": "ES2024",
+    "module": "NodeNext",
 
     "sourceMap": true,
     "declaration": true,
 
-    "rootDir": "src",
-    "outDir": "dist"
+    "isolatedModules": true,
+    "strict": true,
+    "verbatimModuleSyntax": true
   }
 }

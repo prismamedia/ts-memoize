@@ -220,7 +220,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@prismamedia/memoize@workspace:."
   dependencies:
-    "@tsconfig/node22": "npm:22.0.0"
     "@types/node": "npm:22.10.7"
     prettier: "npm:3.4.2"
     publint: "npm:0.3.2"
@@ -233,13 +232,6 @@ __metadata:
   version: 0.1.1
   resolution: "@publint/pack@npm:0.1.1"
   checksum: 10/9dcb767cc978d2e57d89a75b47fbf0c4639a8d435933786ddadbf09a5f257a24d5e6428f94e02164cfdf9d0cb1dcfb9acd6814ef6903e9b4eb5e19159aea5096
-  languageName: node
-  linkType: hard
-
-"@tsconfig/node22@npm:22.0.0":
-  version: 22.0.0
-  resolution: "@tsconfig/node22@npm:22.0.0"
-  checksum: 10/9fc45789304640e1e37e1f1e04c02dca593c290d4f1cb55af7e9cab799fb2c6356e1cc15ee9f140185591a81f491a4c7f2d6c08c1e5a3d758658ba69f1afee6d
   languageName: node
   linkType: hard
 

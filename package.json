@@ -28,7 +28,6 @@
     "test:watch": "node --import tsx --test --watch --experimental-test-snapshots \"./src/**/*.test.ts\""
   },
   "devDependencies": {
-    "@tsconfig/node22": "22.0.0",
     "@types/node": "22.10.7",
     "prettier": "3.4.2",
     "publint": "0.3.2",

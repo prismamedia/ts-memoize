@@ -28,8 +28,8 @@
     "test:watch": "node --import tsx --test --watch --experimental-test-snapshots \"./src/**/*.test.ts\""
   },
   "devDependencies": {
-    "@types/node": "22.15.32",
-    "prettier": "3.5.3",
+    "@types/node": "22.16.5",
+    "prettier": "3.6.2",
     "publint": "0.3.12",
     "tsx": "4.20.3",
     "typescript": "5.8.3"
